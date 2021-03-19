@@ -1,17 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ingredients1 from './Ingredients';
+import ingredients2 from './Ingredients2';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+
+const List = ({ list })  => (
+    <div className="board-container">
+        <div className="board-header">
+            Ingredients
+        </div>
+        <div>
+            {list.map(item =>(
+                <div className='board-item' key={item.id}>
+                        {item.ingredient}
+                </div>
+            ))}
+        </div>
+    </div>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const Board = ({ lists })  => (
+    <div className="main-board-container">
+        {lists.map(list =>(
+            <List key={list.id} list={list.ingredients} />
+        ))}
+    </div>
+);
+
+let lists =[ingredients1, ingredients2]
+
+ReactDOM.render(
+    <Board lists={lists} />
+    ,
+    document.querySelector('#root')
+);
